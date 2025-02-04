@@ -21,26 +21,28 @@ public class TakeShaurma : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("ShaurmaOne"))
+        string collisionName = collision.gameObject.tag;
+        switch (collisionName)
         {
-            Destroy(collision.gameObject);
-            points += 5;
+            case "ShaurmaOne":
+                PlusPoints(collision.gameObject, 5);
+                break;
+            case "ShaurmaTwo":
+                PlusPoints(collision.gameObject, 10);
+                break;
+            case "ShaurmaThree":
+                PlusPoints(collision.gameObject, 15);
+                break;
+            case "ShaurmaFour":
+                PlusPoints(collision.gameObject, 20);
+                break;
         }
-            if (collision.gameObject.CompareTag("ShaurmaTwo"))
-            {
-                Destroy(collision.gameObject);
-                points += 10;
-            }
-                if (collision.gameObject.CompareTag("ShaurmaThree"))
-                {
-                    Destroy(collision.gameObject);
-                    points += 15;
-                }
-                    if (collision.gameObject.CompareTag("ShaurmaFour"))
-                    {
-                        Destroy(collision.gameObject);
-                        points += 20;
-                    }
+        
+    }
+    private void PlusPoints(GameObject point,int score)
+    {
+        Destroy(point);
+        points += score;
         PointText.text = "Points: " + points.ToString();
     }
 }
